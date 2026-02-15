@@ -8,7 +8,7 @@
 			box-sizing: border-box;
 		}
 		body {
-			background-color: #121212;
+			background-color: #0a192f;
 			overflow-x: hidden;
 		}
 
@@ -27,17 +27,18 @@
 		.estilo {
 			display: flex;
 			flex-direction: column;
-			background-color: #2C2C2C;
+			background-color: #112240;
 			width: 350px;
 			height: 300px;
 			margin-left: 6px;
-			margin-top: 6px;
+			margin-top: 20px;
 			text-align: center;
 			border-radius: 20px;
+			box-shadow: 1px 4px 70px 0px black;
 		}
 
 		.texto-style {
-			color: #FFFFFF;
+			color: #e6f1ff;
 			font-family: arial;
 			text-transform: uppercase;
 
@@ -54,12 +55,13 @@
 			height: 40px;
 			margin: auto;
 			border: none;
-			background-color: indianred;
-			color: white;
+			background-color: #64ffda;
+			color: black;
 			border-radius: 20px;
 			font-weight: bold;
 			font-size: 15px;
 			cursor: pointer;
+			box-shadow: 0px 3px 30px 0px black;
 		}
 
 		.coff {
@@ -73,24 +75,60 @@
 			border: none;
 			background-color: purple;
 			opacity: 0.5;
+			outline: 2px solid white;
 		}
 		.cf {
 			width: 30px;
 		}
 
 		.embreve-style {
-			background-color: lightgrey;
+			background-color: grey;
 			color: red;
 			opacity: 0.4;
 			cursor: not-allowed;
+		}
+
+		.popupbuttons {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding-top: 10px;
+			position: fixed;
+			z-index: 999;
+			height: 170px;
+			width: 120px;
+			border-radius: 15px;
+			background-color:black;
+			outline: 3px solid white;
+			bottom: 90px;
+			visibility: hidden;
+			left: 10px;
+
+		}
+
+		.homebt, .cmdsbt {
+			width: 80%;
+			margin-top: 10px;
+			height: 40px;
+			background-color: white;
+			border-radius: 15px;
+			border: none;
+		}
+
+		.invisible-card {
+			visibility: hidden;
+		}
+
+		.visible-card {
+			visibility: visible;
 		}
 	</style>
 </head>
 <body>
 	<div class="centro"></div>
 	<button class="coff"> <img src="coffe.png" alt="cafe" class="cf"></button>
+	<div class="popupbuttons"><button class="homebt">Mods</button><button class="cmdsbt">Commands</button></div>
 </body>
-
 <script>
 	var cent = document.querySelector('.centro')
 	
@@ -140,9 +178,21 @@
 
 <script>
 	var bt = document.querySelector('.coff')
-
+	var cmdbt = document.querySelector('.cmdsbt')
+	var modsbt = document.querySelector('.homebt')
+	var btnCard = document.querySelector('.popupbuttons')
+	var visible = false
 	bt.addEventListener('click', function() {
-		alert('em breve')
+
+		if (visible == true) {
+			btnCard.classList.remove('visible-card')
+			btnCard.classList.add('invisible-card')
+			visible = false
+		} else {
+			btnCard.classList.remove('invisible-card')
+			btnCard.classList.add('visible-card')
+			visible = true
+		}
 	})
 </script>
 </html>
