@@ -1,0 +1,148 @@
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		body {
+			background-color: #121212;
+			overflow-x: hidden;
+		}
+
+		.centro {
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+		}
+
+		@media (min-width: 746px) {
+			.centro {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+
+
+		.estilo {
+			display: flex;
+			flex-direction: column;
+			background-color: #2C2C2C;
+			width: 350px;
+			height: 300px;
+			margin-left: 6px;
+			margin-top: 6px;
+			text-align: center;
+			border-radius: 20px;
+		}
+
+		.texto-style {
+			color: #FFFFFF;
+			font-family: arial;
+			text-transform: uppercase;
+
+		}
+		.desc-style {
+			font-weight: bold;
+			font-family: arial;
+			color: #AAAAAA;
+			margin: 5px;
+		}
+
+		.btn-style {
+			width: 80%;
+			height: 40px;
+			margin: auto;
+			border: none;
+			background-color: indianred;
+			color: white;
+			border-radius: 20px;
+			font-weight: bold;
+			font-size: 15px;
+			cursor: pointer;
+		}
+
+		.coff {
+			position: fixed;
+			z-index: 999;
+			bottom: 20px;
+			left: 20px;
+			height: 50px;
+			width: 50px;
+			border-radius: 1000px;
+			border: none;
+			background-color: purple;
+			opacity: 0.5;
+		}
+		.cf {
+			width: 30px;
+		}
+
+		.embreve-style {
+			background-color: lightgrey;
+			color: red;
+			opacity: 0.4;
+			cursor: not-allowed;
+		}
+	</style>
+</head>
+<body>
+	<div class="centro"></div>
+	<button class="coff"> <img src="coffe.png" alt="cafe" class="cf"></button>
+</body>
+
+<script>
+	var cent = document.querySelector('.centro')
+	
+	async function card() {
+		const urlmods = 'https://raw.githubusercontent.com/isaax-dev/jsonmodsmine/refs/heads/main/mods.json'
+		const resp = await fetch(urlmods)
+		let mods = await resp.json()		
+		for (const mod of mods) {
+
+		const esp = document.createElement('div')
+		const txt = document.createElement('h3')
+		const descricao = document.createElement('p')
+		const btn = document.createElement('button')
+
+		txt.innerText = mod['nome']
+		descricao.innerText = mod['descricao']
+		btn.innerText = 'BAIXAR'
+
+		esp.classList.add('estilo')
+		txt.classList.add('texto-style')
+		descricao.classList.add('desc-style')
+		btn.classList.add('btn-style')
+
+		cent.appendChild(esp)
+		esp.appendChild(txt)
+		esp.appendChild(descricao)
+		esp.appendChild(btn)
+
+		if (mod['link'] == 'nil') {
+			btn.classList.add('embreve-style')
+			btn.innerText = "EM BREVE"
+			btn.disabled = true
+		}
+
+		function baixar(nome) {
+			window.location.href = nome
+
+		}
+		btn.addEventListener('click', function() {
+			alert(`[${mod['nome']}] aguardando link`)
+			setTimeout(function() {baixar(mod['link'])}, 500);
+		})
+	}
+	}
+	card()
+</script>
+
+<script>
+	var bt = document.querySelector('.coff')
+
+	bt.addEventListener('click', function() {
+		alert('em breve')
+	})
+</script>
+</html>
